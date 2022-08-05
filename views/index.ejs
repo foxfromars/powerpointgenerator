@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pptxgen</title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+<body>  
+
+    <div id="pageName">
+        <h3 id="slideName">Nome da Pagina</h3>
+        <button id="editarNome">Editar</button>
+    </div>
+
+    <div class="pageNavegation">
+        <button class="previousButton"> &#8592; </button>
+        <div class="preview"></div>
+        <button class="nextButton"> &#8594; </button>
+    </div>
+
+    <form action="GET" class="personalizationForm" id="formBody">
+
+            <div>
+                <p class="pages">1/1</p>
+                <button class="submitImage" type="button">BackgroundImage</button>
+                <button type="button" class="download">Download</button>
+            </div>
+
+            <div class="optionForm">
+                <div>
+                    <label for="templateSelect">Template</label>
+                    <select name="template" id="templateSelect">
+                        <option value="">__escolha__</option>
+                        <option value="grafico" id="grafico">Grafico</option>
+                        <option value="graficoEtexto" id="graficoEtexto"> Grafico + Texto</option>
+                        <option value="textoEgrafico" id="textoEgrafico"> Texto + Grafico</option>
+                        <option value="texto" id="texto"> Texto </option>
+                    </select>
+                </div>
+
+                <div class="textInput">
+                    <label for="textSlide"> text input </label>
+                    <input type="textarea" id="textSlide" placeholder="Texto do Slide">
+                </div>
+
+                <div>
+                    <label for="fontSelector">Tamanho da font</label>
+                    <input type="number" name="fontSize" id="fontSelector"
+                    min="5" max="40" required >
+                </div>
+
+                <div>
+                    <label for="bold">Negrito</label>
+                    <input type="checkbox" name="bold" id="bold">
+                </div>
+
+                <div class="objectsSelectorDiv">
+                    <label for="objectsSelector">Tipo de Grafico</label>
+                    <select name="objects" id="objectsSelector" required>
+                        <option value="blank">Nenhum</option>
+                        <option value="pizza">grafico pizza</option>
+                        <option value="coluna">grafico de coluna</option>
+                        <option value="barra">barra</option>
+                    </select>
+                </div>
+
+                <div class="ApiSelect">
+                    <label for="ApiInformation">Api</label>
+                    <select name="" id="ApiInformation"></select>
+                </div>
+
+            </div>
+
+                <div>
+                    <button type="button"> + </button>
+                </div>
+
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.10.0/dist/pptxgen.bundle.js"></script>
+   <script src="JS/index.js"></script> 
+</body>
+</html>

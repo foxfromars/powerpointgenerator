@@ -1,0 +1,96 @@
+body {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    background-color : grey;
+    font-family : 'Sans Serif'
+}
+
+.pageNavegation {
+    display : flex;
+    flex-direction : row;
+    justify-content : space-between;
+    align-items : center; 
+    margin-bottom : 20px;
+}
+
+#pageName {
+    display : inline;
+    text-align : center;
+}
+
+#slideName {
+    display : inline;
+}
+
+#editarNome {
+    display : inline;
+    height : 20px;
+    min-width : 20px;
+}
+
+.preview {
+    width : 720px;
+    height : 405px;
+    background-color : white;
+    display: flex;
+    flex-direction : row ;
+    justify-content : space-between;
+    align-items : center;
+    margin : 30px;
+}
+.preview p {
+    max-width : 50%;
+    margin : 20px;
+    word-wrap: break-word;
+}
+
+.previousButton {
+    font-size : 2em;
+    width:71px;
+    height:70px;
+    border-width:3px;
+    color:rgba(7, 6, 6, 1;
+    border-color:rgba()121, 120, 118, 0.33);
+    border-top-left-radius:42px;
+    border-top-right-radius:42px;
+    border-bottom-left-radius:42px;
+    border-bottom-right-radius:42px;
+    box-shadow:inset 0px -38px 0px -15px rgba(216, 204, 204, 0.4);
+    text-shadow:inset 0px 1px 0px rgba(168, 160, 159, 1);
+    background:rgba(246, 244, 244, 1); 
+}
+
+.nextButton {
+    font-size : 2em;
+    width:71px;
+    height:70px;
+    border-width:3px;
+    color:rgba(7, 6, 6, 1;
+    border-color:rgba()121, 120, 118, 0.33);
+    border-top-left-radius:42px;
+    border-top-right-radius:42px;
+    border-bottom-left-radius:42px;
+    border-bottom-right-radius:42px;
+    box-shadow:inset 0px -38px 0px -15px rgba(216, 204, 204, 0.4);
+    text-shadow:inset 0px 1px 0px rgba(168, 160, 159, 1);
+    background:rgba(246, 244, 244, 1); 
+}
+
+.personalizationForm {
+    display : flex;
+    flex-direction : row;
+    justify-content : space-between;
+    width : 820px;
+    height: 140px;
+}
+
+.optionForm {
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+}
+
+.submitImage {
+    height : 30%;
+}
