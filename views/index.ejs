@@ -14,16 +14,16 @@
     </div>
 
     <div class="pageNavegation">
-        <button class="previousButton"> &#8592; </button>
+        <button class="previousButton" id="previousSlide"> &#8592; </button>
         <div class="preview"></div>
-        <button class="nextButton"> &#8594; </button>
+        <button class="nextButton" id="nextSlide"> &#8594; </button>
     </div>
 
     <form action="GET" class="personalizationForm" id="formBody">
 
             <div>
-                <p class="pages">1/1</p>
-                <button class="submitImage" type="button">BackgroundImage</button>
+                <p class="pages" id="slidePage"></p>
+                <input type="file" name="backgroundImage" id="backgroundImage">
                 <button type="button" class="download">Download</button>
             </div>
 
@@ -51,11 +51,14 @@
                 </div>
 
                 <div>
-                    <label for="bold">Negrito</label>
-                    <input type="checkbox" name="bold" id="bold">
+                    <label for="textWeight">Text Weight</label>
+                    <select name="textWeight" id="textWeight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                    </select>
                 </div>
 
-                <div class="objectsSelectorDiv">
+                <div class="graficSelect">
                     <label for="objectsSelector">Tipo de Grafico</label>
                     <select name="objects" id="objectsSelector" required>
                         <option value="blank">Nenhum</option>
@@ -73,11 +76,11 @@
             </div>
 
                 <div>
-                    <button type="button"> + </button>
+                    <button type="button" id="plusPage" class="previousButton"> + </button>
+                    <button type="button" id="save">Save</button>
                 </div>
 
     </form>
-
     <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.10.0/dist/pptxgen.bundle.js"></script>
    <script src="JS/index.js"></script> 
 </body>
