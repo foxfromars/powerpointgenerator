@@ -3,6 +3,7 @@ const form = document.querySelector('.personalizationForm');
 form.reset();
 
 //localizaçao do slide
+//addSlide event
 let pageIn = 1;
 let pageMax = 1;
 const slidePage = document.querySelector('#slidePage');
@@ -15,6 +16,7 @@ plusPage.addEventListener('click', function(){
 
 })
 
+//nextSlide event
 const nextSlide = document.querySelector('#nextSlide');
 nextSlide.addEventListener('click', function(){
     if(pageIn < pageMax){
@@ -37,33 +39,43 @@ previewGraf.innerText = 'Grafico';
 
 const preview = document.querySelector('.preview');
 
+//texto no slide conforme é escrito
 const textInput =  document.querySelector('#textSlide')
 addEventListener('input', function(){
     previewText.innerText = textInput.value; 
 })
 
-//template conditions
+//template condições
 let selectTemplateNumber = 0;
 selectTemplate.addEventListener('change', function(){
     selectTemplateNumber = selectTemplate.options.selectedIndex; 
     previewDiv.innerHTML = '';
     if(selectTemplateNumber == 1 ){
-        previewDiv.appendChild(previewGraf)
+        previewDiv.appendChild(previewGraf);
+        previewDiv.style.justifyContent = 'center';
+        previewText.style.width = '80%'
     }
     else if(selectTemplateNumber == 2){
         previewDiv.appendChild(previewGraf);
         previewDiv.appendChild(previewText);
+        previewDiv.style.justifyContent = 'space-between';
+        previewText.style.width = '50%'
     }
     else if(selectTemplateNumber == 3){
         previewDiv.appendChild(previewText);
         previewDiv.appendChild(previewGraf);
+        previewDiv.style.justifyContent = 'space-between';
+        previewText.style.width = '50%'
+        
     }
     else if(selectTemplateNumber == 4){
         previewDiv.appendChild(previewText);
+        previewDiv.style.justifyContent = 'center';
+        previewText.style.width = '80%'
     }
 })
 
-//font preview
+//fontSize preview
 const fontSizeInput = document.querySelector('#fontSelector');
 let fontSizeValue = fontSizeInput.value;
 
@@ -71,6 +83,18 @@ fontSizeInput.addEventListener('change', function(){
     fontSizeValue = fontSizeInput.value;
     previewText.style.fontSize = `${fontSizeValue}px`
 
+})
+
+//fontColor preview
+const fontColor = document.querySelector('#fontColor');
+fontColor.addEventListener('change', function(){
+    if(fontColor.options.selectedIndex == 0){
+       previewDiv.style.color = 'black'; 
+    }
+    else if(fontColor.options.selectedIndex == 1){
+        previewDiv.style.color = 'white';
+    }
+    
 })
 
 //editar nome do slide
@@ -105,7 +129,7 @@ editButton.addEventListener('click', function(){
     
 })
 
-//Peso da fonte
+//Peso da fonte preview
 const textWeight = document.querySelector('#textWeight');
 textWeight.addEventListener('change', function(){
     const textWeightIndex = textWeight.options.selectedIndex;
@@ -137,27 +161,43 @@ inputFile.addEventListener('change', function (e) {
     })
 
 //save preview in object
+//array de objetos onde é armazenado os dados do preview para escrita do powerpoint
 let dados = []
+
+//save preview no objeto e adicionando ao array
 nextSlide.addEventListener('click', function(){
     dados.push({
     pageName : document.querySelector('#slideName').innerText,
     template : document.querySelector('#templateSelect').options.selectedIndex,
+    backgroundImage : function(){
+        if(document.querySelector('#previewDiv').style.backgroundImage){
+            return document.querySelector('#previewDiv').style.backgroundImage; 
+        }
+        else{
+            return null;
+        }
+    },
     text : textInput.value, 
     fontSize : document.querySelector('#fontSelector').value,
+    fontColor : document.querySelector('#fontColor').options.selectedIndex, 
+    fontWeight : document.querySelector('#textWeight').options.selectedIndex,
     graficType : document.querySelector('#objectsSelector').options.selectedIndex 
 })
 
 })
 
+//criação do slide através da biblioteca PptxGenJS
+//evento de criação de um evento no botão download
 const download = document.querySelector('.download')
 
 download.addEventListener('click', function(){
+    //criação da classe de apresentaçao
     let press = new PptxGenJS();
     
     //meta data e layout 
     press.layout = 'LAYOUT_16x9';
     press.title = 'PowerPointGenerator';
-    //criando os slides
+    //criando os slides através de uma iteraçao sobre os dados 
     for(let slide of dados){
         press.addSlide().addText(slide.text, {x : 1, y :1})
     } 
