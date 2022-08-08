@@ -17,14 +17,7 @@ plusPage.addEventListener('click', function(){
 })
 
 //nextSlide event
-const nextSlide = document.querySelector('#nextSlide');
-nextSlide.addEventListener('click', function(){
-    if(pageIn < pageMax){
-        pageIn =  pageIn + 1;
-        slidePage.innerText = `${pageIn}/${pageMax}`;
-        form.reset();
-    }
-})
+
 
 
 //eventos para trocar os templates de PowerPoint
@@ -144,6 +137,7 @@ textWeight.addEventListener('change', function(){
 
 //backgroundImage preview
 const inputFile = document.querySelector('#backgroundImage');
+let imageBackgroundArray = [];
 
 inputFile.addEventListener('change', function (e) {
     const inputTarget = e.target;
@@ -156,6 +150,7 @@ inputFile.addEventListener('change', function (e) {
             readerTarget = e.target;
             previewDiv.style.backgroundImage = `url(${readerTarget.result})`; 
             previewDiv.style.backgroundSize = 'cover'
+            imageBackgroundArray.push(readerTarget.result);
         })
     reader.readAsDataURL(file);
     }
@@ -166,6 +161,8 @@ inputFile.addEventListener('change', function (e) {
 let dados = []
 
 //save preview no objeto e adicionando ao array
+const nextSlide = document.querySelector('#nextSlide');
+
 nextSlide.addEventListener('click', function(){
     dados.push({
     pageName : document.querySelector('#slideName').innerText,
@@ -185,7 +182,12 @@ nextSlide.addEventListener('click', function(){
     // graficType : document.querySelector('#objectsSelector').options.selectedIndex 
 })
 
+    if(pageIn < pageMax){
+        pageIn =  pageIn + 1;
+        slidePage.innerText = `${pageIn}/${pageMax}`;
+        form.reset();}
 })
+
 
 //criação do slide através da biblioteca PptxGenJS
 //evento de criação de um evento no botão download
@@ -194,15 +196,62 @@ const download = document.querySelector('#download')
 download.addEventListener('click', function(){
     //criação da classe de apresentaçao
     let press = new PptxGenJS();
-    
+     
     //meta data e layout 
     press.layout = 'LAYOUT_16x9';
     press.title = 'PowerPointGenerator';
+
     //criando os slides através de uma iteraçao sobre os dados 
+    let temp = null;
+    let dataGraphs = null; 
     for(let slide of dados){
-        press.addSlide().addText(slide.text, {x : 1, y :1})
+
+        //template grafico
+        if(slide.template == 1){
+
+             dataGraphs = [{
+                name : "james",
+                labels : ["jan","fev","mar"],
+                values : [1290,4900,2500]
+            }];
+            temp = press.addSlide(); 
+            temp.addChart(press.ChartType.bar, dataGraphs,{ x: "50%", y: "70%", w: "90%", h: "80%" , align : "center"}) ;
+             
+        }
+        //template grafico-texto
+        else if(slide.template == 2){
+            dataGraphs = [{
+                name : "james",
+                labels : ["jan","fev","mar","april"],
+                values : [1200,3000,2500,5000]
+            }]
+
+            temp = press.addSlide();
+            temp.addText(slide.text, {x : 6, y :2 , w : 4 , h: 3});
+            temp.addChart(press.ChartType.bar, dataGraphs,{ x: 0, y: 2, w: "50%", h: 3 , align : "center" }) ;
+        }
+        //template texto-grafico
+        else if(slide.template == 3){
+            dataGraphs = [{
+                name : "james",
+                labels : ["jan","fev","mar","april"],
+                values : [1200,3000,2500,5000]
+            }]
+
+            temp = press.addSlide();
+            temp.addText(slide.text, {x : 0, y :2 , w : "50%" , h: 3});
+            temp.addChart(press.ChartType.bar, dataGraphs,{ x: 5, y: 2, w: "50%", h: 3, align : "center"}) ;
+        }
+        //template texto
+        else if(slide.template == 4){
+            dataGraphs = [{}]
+
+            temp = press.addSlide();
+            temp.addText(slide.text, {x : "50%", y :"50%" , w : "90%" , h: "80%", align : "center"});
+        }
+        
     } 
-    press.writeFile({ filename : 'testPresentation'});
+    press.writeFile({ fileName : `${dados[0].pageName}`});
 })
 
 
