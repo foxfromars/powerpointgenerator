@@ -10,7 +10,7 @@
 
     <div id="pageName">
         <h3 id="slideName">Nome da Pagina</h3>
-        <button id="editarNome">Editar</button>
+        <button id="editarNome" class="buttonStyle">Editar</button>
     </div>
 
     <div class="pageNavegation">
@@ -24,10 +24,16 @@
             <div>
                 <p class="pages" id="slidePage"></p>
                 <input type="file" name="backgroundImage" id="backgroundImage">
-                <button type="button" class="download">Download</button>
+                <button type="button" id="download" class="buttonStyle" >Download</button>
             </div>
 
             <div class="optionForm">
+                
+                <div class="ApiSelect">
+                    <label for="ApiInformation">Api</label>
+                    <select name="" id="ApiInformation"></select>
+                </div>
+
                 <div>
                     <label for="templateSelect">Template</label>
                     <select name="template" id="templateSelect">
@@ -65,16 +71,6 @@
                     </select>
                 </div>
 
-                <div class="graficSelect">
-                    <label for="objectsSelector">Tipo de Grafico</label>
-                    <select name="objects" id="objectsSelector" required>
-                        <option value="blank">Nenhum</option>
-                        <option value="pizza">grafico pizza</option>
-                        <option value="coluna">grafico de coluna</option>
-                        <option value="barra">barra</option>
-                    </select>
-                </div>
-
                 <div class="ApiSelect">
                     <label for="ApiInformation">Api</label>
                     <select name="" id="ApiInformation"></select>
@@ -84,7 +80,6 @@
 
                 <div>
                     <button type="button" id="plusPage" class="previousButton"> + </button>
-                    <button type="button" id="save">Save</button>
                 </div>
 
     </form>

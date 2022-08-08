@@ -70,8 +70,7 @@ selectTemplate.addEventListener('change', function(){
     }
     else if(selectTemplateNumber == 4){
         previewDiv.appendChild(previewText);
-        previewDiv.style.justifyContent = 'center';
-        previewText.style.width = '80%'
+        previewDiv.style.justifyContent = 'center'; previewText.style.width = '80%'
     }
 })
 
@@ -107,6 +106,8 @@ editButton.addEventListener('click', function(){
 
     const inputTitleButton = document.createElement('button');
     inputTitleButton.setAttribute('type','button');
+    inputTitleButton.classList.toggle('buttonStyle');
+    inputTitleButton.innerText = 'Salvar'
 
 
     
@@ -180,15 +181,15 @@ nextSlide.addEventListener('click', function(){
     text : textInput.value, 
     fontSize : document.querySelector('#fontSelector').value,
     fontColor : document.querySelector('#fontColor').options.selectedIndex, 
-    fontWeight : document.querySelector('#textWeight').options.selectedIndex,
-    graficType : document.querySelector('#objectsSelector').options.selectedIndex 
+    fontWeight : document.querySelector('#textWeight').options.selectedIndex
+    // graficType : document.querySelector('#objectsSelector').options.selectedIndex 
 })
 
 })
 
 //criação do slide através da biblioteca PptxGenJS
 //evento de criação de um evento no botão download
-const download = document.querySelector('.download')
+const download = document.querySelector('#download')
 
 download.addEventListener('click', function(){
     //criação da classe de apresentaçao
@@ -203,3 +204,11 @@ download.addEventListener('click', function(){
     } 
     press.writeFile({ filename : 'testPresentation'});
 })
+
+
+// axios.get('https://datasend.orquestraerp.com/api/Empresas')
+// .then( (response) => {
+//    for(let i = 0; i < response.lenght; i++){
+//        console.log(response[i].nome);
+//    } 
+// })
