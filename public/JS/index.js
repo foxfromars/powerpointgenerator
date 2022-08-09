@@ -271,7 +271,7 @@ download.addEventListener('click', function(){
 
             temp = press.addSlide();
             temp.background = { data: slide.backgroundImage};
-            temp.addText(slide.text, {x : 0, y :2 , w : "50%" , h: 3, color : slide.fontColor , fontSize : parseInt(slide.fontSize , bold : slide.fontWeight)});
+            temp.addText(slide.text, {x : 0, y :2 , w : "50%" , h: 3, color : slide.fontColor , fontSize : parseInt(slide.fontSize) , bold : slide.fontWeight});
             temp.addChart(press.ChartType.bar, dataGraphs,{ x: 5, y: 2, w: "50%", h: 3, align : "center"}) ;
         }
         //template texto
