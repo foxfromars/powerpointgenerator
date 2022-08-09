@@ -14,7 +14,6 @@
     </div>
 
     <div class="pageNavegation">
-        <button class="previousButton" id="previousSlide"> &#8592; </button>
         <div class="preview"></div>
         <button class="nextButton" id="nextSlide"> &#8594; </button>
     </div>
@@ -30,8 +29,18 @@
             <div class="optionForm">
                 
                 <div class="ApiSelect">
-                    <label for="ApiInformation">Api</label>
-                    <select name="" id="ApiInformation"></select>
+                    <div>
+                        <label for="ApiEmpresa">Empresa</label>
+                        <select name="" id="ApiEmpresa">
+                            <option value="__selecione__">__SELECIONE__</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="ApiCampanha">Campanha</label>
+                        <select name="" id="ApiCampanha">
+                            <option value="__selecione__">__SELECIONE__</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div>
@@ -80,6 +89,7 @@
                 </div>
 
     </form>
+    <script> src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"</script>   
     <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.10.0/dist/pptxgen.bundle.js"></script>
    <script src="JS/index.js"></script> 
 </body>

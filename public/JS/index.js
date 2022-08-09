@@ -1,6 +1,13 @@
+
 //resetar o formulario 
 const form = document.querySelector('.personalizationForm');
 form.reset();
+
+
+
+
+//selectEmpresa
+
 
 //localizaçao do slide
 //addSlide event
@@ -16,7 +23,6 @@ plusPage.addEventListener('click', function(){
 
 })
 
-//nextSlide event
 
 
 
@@ -24,11 +30,11 @@ plusPage.addEventListener('click', function(){
 const selectTemplate = document.querySelector('#templateSelect')
 const previewDiv = document.querySelector('.preview');
 
-const previewGraf = document.createElement('p');
+const previewGraf = document.createElement('img');
 const previewText = document.createElement('p');
 
+previewGraf.setAttribute('src', 'IMG/graphicsPreview.png')
 previewText.innerText = 'Texto';
-previewGraf.innerText = 'Grafico';
 
 const preview = document.querySelector('.preview');
 
@@ -52,13 +58,15 @@ selectTemplate.addEventListener('change', function(){
         previewDiv.appendChild(previewGraf);
         previewDiv.appendChild(previewText);
         previewDiv.style.justifyContent = 'space-between';
-        previewText.style.width = '50%'
+        previewGraf.style.maxWidth = '45%'
+        previewText.style.maxWidth = '45%'
     }
     else if(selectTemplateNumber == 3){
         previewDiv.appendChild(previewText);
         previewDiv.appendChild(previewGraf);
         previewDiv.style.justifyContent = 'space-between';
-        previewText.style.width = '50%'
+        previewGraf.style.maxWidth = '45%'
+        previewText.style.maxWidth = '45%'
         
     }
     else if(selectTemplateNumber == 4){
@@ -81,10 +89,10 @@ fontSizeInput.addEventListener('change', function(){
 const fontColor = document.querySelector('#fontColor');
 fontColor.addEventListener('change', function(){
     if(fontColor.options.selectedIndex == 0){
-       previewDiv.style.color = 'black'; 
+       previewText.style.color = 'black'; 
     }
     else if(fontColor.options.selectedIndex == 1){
-        previewDiv.style.color = 'white';
+        previewText.style.color = 'white';
     }
     
 })
@@ -137,7 +145,7 @@ textWeight.addEventListener('change', function(){
 
 //backgroundImage preview
 const inputFile = document.querySelector('#backgroundImage');
-let imageBackgroundArray = [];
+let imageBackground = null;
 
 inputFile.addEventListener('change', function (e) {
     const inputTarget = e.target;
@@ -150,7 +158,7 @@ inputFile.addEventListener('change', function (e) {
             readerTarget = e.target;
             previewDiv.style.backgroundImage = `url(${readerTarget.result})`; 
             previewDiv.style.backgroundSize = 'cover'
-            imageBackgroundArray.push(readerTarget.result);
+            imageBackground = readerTarget.result;
         })
     reader.readAsDataURL(file);
     }
@@ -158,8 +166,25 @@ inputFile.addEventListener('change', function (e) {
 
 //save preview in object
 //array de objetos onde é armazenado os dados do preview para escrita do powerpoint
-let dados = []
+//function que converte o index do select em uma cor hexadecimal correspondente para colocar no objeto
+function colorHex (selectIndex) {
+    if(selectIndex == 0){
+        return '000000'
+    }
+    else if(selectIndex == 1){
+        return 'FFFFFF'
+    }
+}
 
+let dados = []
+function isBackgroundImage(){
+    if(document.querySelector('.preview').style.backgroundImage == undefined){
+        return 'notFound'
+    }
+    else{
+        return imageBackground 
+    }
+}
 //save preview no objeto e adicionando ao array
 const nextSlide = document.querySelector('#nextSlide');
 
@@ -167,17 +192,10 @@ nextSlide.addEventListener('click', function(){
     dados.push({
     pageName : document.querySelector('#slideName').innerText,
     template : document.querySelector('#templateSelect').options.selectedIndex,
-    backgroundImage : function(){
-        if(document.querySelector('#previewDiv').style.backgroundImage){
-            return document.querySelector('#previewDiv').style.backgroundImage; 
-        }
-        else{
-            return null;
-        }
-    },
+    backgroundImage : isBackgroundImage(),
     text : textInput.value, 
     fontSize : document.querySelector('#fontSelector').value,
-    fontColor : document.querySelector('#fontColor').options.selectedIndex, 
+    fontColor : colorHex(document.querySelector('#fontColor').options.selectedIndex), 
     fontWeight : document.querySelector('#textWeight').options.selectedIndex
     // graficType : document.querySelector('#objectsSelector').options.selectedIndex 
 })
@@ -215,6 +233,7 @@ download.addEventListener('click', function(){
                 values : [1290,4900,2500]
             }];
             temp = press.addSlide(); 
+            temp.background = { data: slide.backgroundImage};
             temp.addChart(press.ChartType.bar, dataGraphs,{ x: "50%", y: "70%", w: "90%", h: "80%" , align : "center"}) ;
              
         }
@@ -227,7 +246,8 @@ download.addEventListener('click', function(){
             }]
 
             temp = press.addSlide();
-            temp.addText(slide.text, {x : 6, y :2 , w : 4 , h: 3});
+            temp.background = { data: slide.backgroundImage};
+            temp.addText(slide.text, {x : 6, y :2 , w : 4 , h: 3 , color : slide.fontColor , fontSize : parseInt(slide.fontSize) });
             temp.addChart(press.ChartType.bar, dataGraphs,{ x: 0, y: 2, w: "50%", h: 3 , align : "center" }) ;
         }
         //template texto-grafico
@@ -239,7 +259,8 @@ download.addEventListener('click', function(){
             }]
 
             temp = press.addSlide();
-            temp.addText(slide.text, {x : 0, y :2 , w : "50%" , h: 3});
+            temp.background = { data: slide.backgroundImage};
+            temp.addText(slide.text, {x : 0, y :2 , w : "50%" , h: 3, color : slide.fontColor , fontSize : parseInt(slide.fontSize)});
             temp.addChart(press.ChartType.bar, dataGraphs,{ x: 5, y: 2, w: "50%", h: 3, align : "center"}) ;
         }
         //template texto
@@ -247,7 +268,8 @@ download.addEventListener('click', function(){
             dataGraphs = [{}]
 
             temp = press.addSlide();
-            temp.addText(slide.text, {x : "50%", y :"50%" , w : "90%" , h: "80%", align : "center"});
+            temp.background = { data: slide.backgroundImage};
+            temp.addText(slide.text, {x : "5%", y :"10%" , w : "90%" , h: "80%", color : slide.fontColor, fontSize : parseInt(slide.fontSize) });
         }
         
     } 
