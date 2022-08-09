@@ -185,6 +185,17 @@ function isBackgroundImage(){
         return imageBackground 
     }
 }
+
+//function para determinar se o texto é negrito ou n
+function isBold(selectBold) {
+    if(selectBold == 0){
+        return false
+    }
+    else {
+        return true
+    }
+}
+
 //save preview no objeto e adicionando ao array
 const nextSlide = document.querySelector('#nextSlide');
 
@@ -196,7 +207,7 @@ nextSlide.addEventListener('click', function(){
     text : textInput.value, 
     fontSize : document.querySelector('#fontSelector').value,
     fontColor : colorHex(document.querySelector('#fontColor').options.selectedIndex), 
-    fontWeight : document.querySelector('#textWeight').options.selectedIndex
+    fontWeight : isBold(document.querySelector('#textWeight').options.selectedIndex)
     // graficType : document.querySelector('#objectsSelector').options.selectedIndex 
 })
 
@@ -247,7 +258,7 @@ download.addEventListener('click', function(){
 
             temp = press.addSlide();
             temp.background = { data: slide.backgroundImage};
-            temp.addText(slide.text, {x : 6, y :2 , w : 4 , h: 3 , color : slide.fontColor , fontSize : parseInt(slide.fontSize) });
+            temp.addText(slide.text, {x : 6, y :2 , w : 4 , h: 3 , color : slide.fontColor , fontSize : parseInt(slide.fontSize), bold : slide.fontWeight });
             temp.addChart(press.ChartType.bar, dataGraphs,{ x: 0, y: 2, w: "50%", h: 3 , align : "center" }) ;
         }
         //template texto-grafico
@@ -260,7 +271,7 @@ download.addEventListener('click', function(){
 
             temp = press.addSlide();
             temp.background = { data: slide.backgroundImage};
-            temp.addText(slide.text, {x : 0, y :2 , w : "50%" , h: 3, color : slide.fontColor , fontSize : parseInt(slide.fontSize)});
+            temp.addText(slide.text, {x : 0, y :2 , w : "50%" , h: 3, color : slide.fontColor , fontSize : parseInt(slide.fontSize , bold : slide.fontWeight)});
             temp.addChart(press.ChartType.bar, dataGraphs,{ x: 5, y: 2, w: "50%", h: 3, align : "center"}) ;
         }
         //template texto
@@ -269,7 +280,7 @@ download.addEventListener('click', function(){
 
             temp = press.addSlide();
             temp.background = { data: slide.backgroundImage};
-            temp.addText(slide.text, {x : "5%", y :"10%" , w : "90%" , h: "80%", color : slide.fontColor, fontSize : parseInt(slide.fontSize) });
+            temp.addText(slide.text, {x : "5%", y :"10%" , w : "90%" , h: "80%", color : slide.fontColor, fontSize : parseInt(slide.fontSize), bold : slide.fontWeight});
         }
         
     } 
