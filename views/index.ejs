@@ -8,14 +8,29 @@
 </head>
 <body>  
 
-    <div id="pageName">
-        <h3 id="slideName">Nome da Pagina</h3>
-        <button id="editarNome" class="buttonStyle">Editar</button>
+    <div class="ApiSelect">
+        <div>
+            <label for="ApiEmpresa">Empresa</label>
+            <select name="" id="ApiEmpresa">
+                <option value="__selecione__">__SELECIONE__</option>
+            </select>
+        </div>
+        <div>
+            <label for="ApiCampanha">Campanha</label>
+            <select name="" id="ApiCampanha">
+                <option value="__selecione__">__SELECIONE__</option>
+            </select>
+        </div>
     </div>
-
+    
     <div class="pageNavegation">
         <div class="preview"></div>
         <button class="nextButton" id="nextSlide"> &#8594; </button>
+    </div>
+
+    <div id="pageName">
+            <h3 id="slideName">Nome da Pagina</h3>
+            <button id="editarNome" class="buttonStyle">Editar</button>
     </div>
 
     <form action="GET" class="personalizationForm" id="formBody">
@@ -28,20 +43,6 @@
 
             <div class="optionForm">
                 
-                <div class="ApiSelect">
-                    <div>
-                        <label for="ApiEmpresa">Empresa</label>
-                        <select name="" id="ApiEmpresa">
-                            <option value="__selecione__">__SELECIONE__</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="ApiCampanha">Campanha</label>
-                        <select name="" id="ApiCampanha">
-                            <option value="__selecione__">__SELECIONE__</option>
-                        </select>
-                    </div>
-                </div>
 
                 <div>
                     <label for="templateSelect">Template</label>

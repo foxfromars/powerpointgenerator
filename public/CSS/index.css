@@ -384,6 +384,10 @@ input , select {
 
 }
 
+.ApiSelect {
+    margin-top :20px;
+}
+
 #fontSelector {
     max-width : 38px;
 }
@@ -403,12 +407,12 @@ input , select {
     flex-direction : row;
     justify-content : space-between;
     align-items : center; 
-    margin-bottom : 20px;
+    margin-bottom : 0px;
 }
 
 #pageName{
     text-align : center;
-    margin-top : 20px;
+    margin-bottom : 40px;
 }
 
 #slideName {
